@@ -1,0 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+$enable-responsive-spacings: false;
+$enable-responsive-typography: false;
+@import '@picocss/pico/scss/pico';
+
+:root {
+  --font-family: 'Space Mono', monospace;
+  --background-color: #212529;
+  --border-radius: 0;
+  --outline-width: 0;
+}
