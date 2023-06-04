@@ -1,6 +1,6 @@
 <script lang="ts">
 import HomePage from '@/pages/home';
-import VizPage from '@/pages/viz';
+import VoyagerPage from '@/pages/voyager';
 import { onMount } from 'svelte';
 import { Route, Router } from 'svelte-routing';
 import { data, loadData } from './stores/data';
@@ -20,7 +20,9 @@ onMount(() => {
 {:else}
   <Router {url}>
     <Route path="/"><HomePage /></Route>
-    <Route path="/viz"><VizPage /></Route>
+    <Route path="/voyager/:missionNumber" let:params>
+      <VoyagerPage missionNumber={+params.missionNumber} />
+    </Route>
   </Router>
 {/if}
 

@@ -2,6 +2,8 @@
 import { pausePlayer, player, resumePlayer } from '@/stores/player';
 import { PauseSharp, PlaySharp } from 'svelte-ionicons';
 
+export let missionNumber = 1;
+
 let dateInput: HTMLInputElement;
 
 $: {
@@ -40,7 +42,7 @@ function onPlayPauseActionClick() {
 
   <div class="text">
     <div class="title">
-      <h1 style="margin-right: auto">Voyager I</h1>
+      <h1 style="margin-right: auto">Voyager {missionNumber}</h1>
 
       <button
         data-tooltip="Speed"

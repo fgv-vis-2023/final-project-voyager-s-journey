@@ -20,10 +20,10 @@ export const data = writable<DataStore>({
 export const loadData = async () => {
   const [voyager1DailyPosition, voyager2DailyPosition] = await Promise.all([
     d3.csv(
-      './data/voyager1-daily-position.csv'
+      '/data/voyager1-daily-position.csv'
     ) as Promise<VoyagerDailyPosition>,
     d3.csv(
-      './data/voyager2-daily-position.csv'
+      '/data/voyager2-daily-position.csv'
     ) as Promise<VoyagerDailyPosition>,
   ]);
 

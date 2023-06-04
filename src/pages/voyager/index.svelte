@@ -1,13 +1,15 @@
 <script lang="ts">
 import MissionHeader from '@/components/mission-header';
-import Simulation from '@/components/simulation';
+import SolarSystem from '@/components/solar-system';
+
+export let missionNumber = 1;
 </script>
 
 <main>
-  <MissionHeader />
+  <MissionHeader missionNumber={missionNumber} />
   <div />
   <aside />
-  <Simulation />
+  <SolarSystem missionNumber={missionNumber} />
 </main>
 
 <style lang="scss">
