@@ -1,6 +1,6 @@
 <script>
-import HomePage from '@/pages/home/home.page.svelte';
-import VizPage from '@/pages/viz/viz.page.svelte';
+import HomePage from '@/pages/home';
+import VizPage from '@/pages/viz';
 import { Route, Router } from 'svelte-routing';
 
 export let url = '';
