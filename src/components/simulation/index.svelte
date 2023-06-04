@@ -51,7 +51,7 @@ $: {
 
   const plantesWithCoords = planets.map((name) => ({
     name,
-    ...getPlanetCoords(name, $player.time),
+    ...getPlanetCoords(name, $player.date.getTime()),
   }));
 
   simulation

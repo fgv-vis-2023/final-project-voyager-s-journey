@@ -13,6 +13,7 @@
     "@picocss/pico": "^1.5.10",
     "@sveltejs/vite-plugin-svelte": "^2.0.3",
     "@tsconfig/svelte": "^4.0.1",
+    "@types/d3": "^7.4.0",
     "svelte": "^3.57.0",
     "svelte-check": "^2.10.3",
     "svelte-ionicons": "^0.5.6",
@@ -22,8 +23,7 @@
     "vite": "^4.3.2"
   },
   "dependencies": {
-    "@imask/svelte": "^6.6.2",
     "d3": "^7.8.4",
-    "imask": "^6.6.2"
+    "dayjs": "^1.11.8"
   }
 }

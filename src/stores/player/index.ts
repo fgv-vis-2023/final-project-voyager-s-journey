@@ -1,14 +1,15 @@
+import dayjs from 'dayjs';
 import { writable } from 'svelte/store';
 
-export interface PlayerStore {
+interface PlayerStore {
   isPlaying: boolean;
-  time: number;
+  date: Date;
   speed: number;
 }
 
 export const player = writable<PlayerStore>({
   isPlaying: true,
-  time: new Date('1977-09-10').getTime(),
+  date: dayjs('1977-09-10').toDate(),
   speed: 1,
 });
 
@@ -21,19 +22,23 @@ player.subscribe((value) => {
     interval = setInterval(() => {
       player.update((oldPlayer) => ({
         ...oldPlayer,
-        time: oldPlayer.time + 5000000 * oldPlayer.speed,
+        date: dayjs(oldPlayer.date)
+          .add(2 * oldPlayer.speed, 'day')
+          .toDate(),
       }));
-    }, 20);
+    }, 35);
   } else {
     clearInterval(interval);
     interval = null;
   }
 });
 
-export function resumePlayer(args?: Exclude<Partial<PlayerStore>, 'isPlaying'>) {
+export function resumePlayer(
+  args?: Exclude<Partial<PlayerStore>, 'isPlaying'>
+) {
   player.update((oldPlayer) => ({
     isPlaying: true,
-    time: args?.time ?? oldPlayer.time,
+    date: args?.date ?? oldPlayer.date,
     speed: args?.speed ?? oldPlayer.speed,
   }));
 }
@@ -44,3 +49,15 @@ export function pausePlayer() {
     isPlaying: false,
   }));
 }
+
+export function togglePlayer() {
+  player.update((oldPlayer) => ({
+    ...oldPlayer,
+    isPlaying: !oldPlayer.isPlaying,
+  }));
+}
+
+window.addEventListener('keydown', (event) => {
+  if (event.target instanceof HTMLInputElement) return;
+  if (event.code === 'Space') togglePlayer();
+});
