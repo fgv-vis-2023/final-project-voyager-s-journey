@@ -3,5 +3,5 @@ import { Link } from 'svelte-routing';
 </script>
 
 <main>
-  <Link to="/viz">Viz</Link>
+  <Link to="/voyager/1">Viz</Link>
 </main>
