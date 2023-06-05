@@ -38,11 +38,15 @@ $: voyagerData = (
   const cosLon = Math.cos(+d.se_lon * deg2rad);
 
   return {
-    date: dayjs(d.date).toDate(),
+    date: dayjs(d.date).format('YYYY-MM-DD'),
     x: r * cosLat * cosLon,
     y: r * cosLat * sinLon,
   };
 });
+
+$: playerDate = dayjs($player.date).format('YYYY-MM-DD');
+
+$: voyagerCoord = voyagerData.find((d) => d.date == playerDate);
 
 onMount(() => {
   solarSystem = d3.select('#solar-system');
@@ -136,10 +140,6 @@ $: if (solarSystem) {
       return `translate(${-width / 2 + center.x}, ${-height / 2 + center.y})`;
     });
 
-  const voyagerCoord = voyagerData.find(
-    (d) => d.date.getTime() === $player.date.getTime()
-  );
-
   if (voyagerCoord) {
     d3.select('circle[data-name="voyager"]')
       .attr('r', scale / 50)
@@ -167,5 +167,7 @@ svg {
 
   width: 100%;
   height: 100%;
+
+  user-select: none;
 }
 </style>
