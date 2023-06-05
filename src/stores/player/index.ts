@@ -9,7 +9,7 @@ interface PlayerStore {
 
 export const player = writable<PlayerStore>({
   isPlaying: true,
-  date: dayjs('1977-09-10').toDate(),
+  date: new Date(),
   speed: 1,
 });
 

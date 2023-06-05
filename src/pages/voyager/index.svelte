@@ -1,15 +1,29 @@
 <script lang="ts">
 import MissionHeader from '@/components/mission-header';
 import SolarSystem from '@/components/solar-system';
+import { pausePlayer, resumePlayer } from '@/stores/player';
+import dayjs from 'dayjs';
+import { onDestroy, onMount } from 'svelte';
 
 export let missionNumber = 1;
+
+onMount(() => {
+  const initialDay = missionNumber == 1 ? '1977-09-05' : '1977-08-25';
+
+  resumePlayer({ date: dayjs(initialDay).toDate() });
+  pausePlayer();
+});
+
+onDestroy(() => {
+  pausePlayer();
+});
 </script>
 
 <main>
-  <MissionHeader missionNumber={missionNumber} />
+  <MissionHeader {missionNumber} />
   <div />
   <aside />
-  <SolarSystem missionNumber={missionNumber} />
+  <SolarSystem {missionNumber} />
 </main>
 
 <style lang="scss">
