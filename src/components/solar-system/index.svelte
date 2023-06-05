@@ -1,10 +1,11 @@
 <script lang="ts">
-import { onMount } from 'svelte';
-import * as d3 from 'd3';
-import { getPlanetCoords } from './planet-coords';
-import { player, resumePlayer } from '@/stores/player';
 import { data } from '@/stores/data';
+import { player } from '@/stores/player';
+import * as d3 from 'd3';
 import dayjs from 'dayjs';
+import { onDestroy, onMount } from 'svelte';
+import { getPlanetCoords } from './planet-coords';
+
 const planets = [
   'mercury',
   'venus',
@@ -24,6 +25,7 @@ let scale = 50;
 let center = { x: 0, y: 0 };
 
 let solarSystem: d3.Selection<SVGSVGElement, unknown, HTMLElement, any>;
+let resizeObserver: ResizeObserver;
 
 $: voyagerData = (
   missionNumber == 1 ? $data.voyager1DailyPosition : $data.voyager2DailyPosition
@@ -45,14 +47,13 @@ $: voyagerData = (
 onMount(() => {
   solarSystem = d3.select('#solar-system');
 
-  const resizeObserver = new ResizeObserver((entries) => {
+  resizeObserver = new ResizeObserver((entries) => {
     const { width: w, height: h } = entries[0].contentRect;
     width = w;
     height = h;
   });
 
   resizeObserver.observe(solarSystem.node()!);
-  resumePlayer();
 
   solarSystem.on('wheel', (event: WheelEvent) => {
     const oldScale = scale;
@@ -89,6 +90,10 @@ onMount(() => {
     solarSystem.on('mousemove', mouseMove);
     solarSystem.on('mouseup', mouseUp);
   });
+});
+
+onDestroy(() => {
+  resizeObserver.disconnect();
 });
 
 $: if (solarSystem) {

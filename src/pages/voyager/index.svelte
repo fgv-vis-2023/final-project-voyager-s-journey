@@ -1,6 +1,7 @@
 <script lang="ts">
 import MissionHeader from '@/components/mission-header';
 import SolarSystem from '@/components/solar-system';
+import Timeline from '@/components/timeline';
 import { pausePlayer, resumePlayer } from '@/stores/player';
 import dayjs from 'dayjs';
 import { onDestroy, onMount } from 'svelte';
@@ -21,7 +22,7 @@ onDestroy(() => {
 
 <main>
   <MissionHeader {missionNumber} />
-  <div />
+  <Timeline  />
   <aside />
   <SolarSystem {missionNumber} />
 </main>
@@ -32,7 +33,7 @@ main {
 
   display: grid;
   grid-template-columns: 24rem 1fr;
-  grid-template-rows: 6.5rem 1fr;
+  grid-template-rows: 7rem 1fr;
 }
 
 aside {

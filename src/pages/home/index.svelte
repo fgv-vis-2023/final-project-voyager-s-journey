@@ -36,7 +36,7 @@ main {
   align-items: center;
   justify-content: center;
 
-  background-color: #111;
+  background-color: #121212;
 }
 
 h1 {
