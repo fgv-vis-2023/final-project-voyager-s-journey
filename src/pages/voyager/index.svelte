@@ -1,4 +1,5 @@
 <script lang="ts">
+import Gallery from '@/components/gallery';
 import MissionHeader from '@/components/mission-header';
 import SolarSystem from '@/components/solar-system';
 import Timeline from '@/components/timeline';
@@ -22,8 +23,8 @@ onDestroy(() => {
 
 <main>
   <MissionHeader {missionNumber} />
-  <Timeline  />
-  <aside />
+  <Timeline {missionNumber} />
+  <Gallery {missionNumber}/>
   <SolarSystem {missionNumber} />
 </main>
 
@@ -32,11 +33,7 @@ main {
   height: 100vh;
 
   display: grid;
-  grid-template-columns: 24rem 1fr;
+  grid-template-columns: 20rem 1fr;
   grid-template-rows: 7rem 1fr;
-}
-
-aside {
-  background-color: #282d31;
 }
 </style>

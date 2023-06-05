@@ -35,10 +35,6 @@ function onPlayPauseActionClick() {
 </script>
 
 <header>
-  <img
-    src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/Voyager_Golden_Record_fx.png/1022px-Voyager_Golden_Record_fx.png"
-    alt="Voyager Golden Record"
-  />
 
   <div class="text">
     <div class="title">
@@ -85,7 +81,6 @@ header {
 
   padding: 1rem;
   height: 100%;
-  width: 24rem;
 }
 
 img {

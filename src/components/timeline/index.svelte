@@ -1,8 +1,11 @@
 <script lang="ts">
+import { data } from '@/stores/data';
 import { player, resumePlayer } from '@/stores/player';
 import * as d3 from 'd3';
 import dayjs from 'dayjs';
 import { onDestroy, onMount } from 'svelte';
+
+export let missionNumber = 1;
 
 let width = 0;
 let height = 0;
@@ -13,8 +16,12 @@ let resizeObserver: ResizeObserver;
 const padding = 15;
 const months = 6;
 
-const startDate = new Date('1977-08-20');
-const endDate = new Date('1989-10-02');
+$: voyagerDates = (
+  missionNumber == 1 ? $data.voyager1DailyPosition : $data.voyager2DailyPosition
+).map((d) => dayjs(d.date));
+
+$: startDate = dayjs.min(voyagerDates)?.toDate();
+$: endDate = dayjs.max(voyagerDates)?.toDate();
 let hoveredDate = null;
 
 $: selectedDate = hoveredDate ?? $player.date;
@@ -131,7 +138,11 @@ $: if (timeline) {
     <rect width={width - padding * 2} height={15} fill="transparent" />
   </g>
 
-  <rect id="main-timeline-brush" height={15} transform="translate({padding}, 10)" />
+  <rect
+    id="main-timeline-brush"
+    height={15}
+    transform="translate({padding}, 10)"
+  />
 
   <g id="main-timeline-axis" transform="translate({padding}, 25)" />
 
