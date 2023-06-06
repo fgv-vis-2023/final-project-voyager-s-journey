@@ -7,9 +7,11 @@ export let missionNumber = 1;
 
 $: images = missionNumber == 1 ? $data.voyager1Images : $data.voyager2Images;
 
-$: imagesUntilDate = images.filter((image) => {
-  return dayjs(image.date).toDate() <= $player.date;
-}).sort((a, b) => b.date.localeCompare(a.date));
+$: imagesUntilDate = images
+  .filter((image) => {
+    return dayjs(image.date).toDate() <= $player.date;
+  })
+  .sort((a, b) => b.date.localeCompare(a.date));
 </script>
 
 <ol>
@@ -18,7 +20,9 @@ $: imagesUntilDate = images.filter((image) => {
       <picture>
         <img src={image.image_url} alt={image.title} />
         <legend>
-          {image.title}
+          <a href={image.page_url} target="_blank" rel="noopener noreferrer">
+            {image.title}
+          </a>
           <br />
           <span> {dayjs(image.date).format('DD/MM/YYYY')} </span>
         </legend>
@@ -39,12 +43,6 @@ ol {
   gap: 1.25rem;
 
   background-color: #121212;
-
-  // scroll snap end
-  scroll-snap-type: y mandatory;
-  scroll-padding: 1rem;
-  scroll-snap-align: start;
-
   user-select: none;
 
   li {
@@ -65,6 +63,10 @@ ol {
 
         font-size: 1rem;
         color: white;
+
+        a {
+          color: white;
+        }
 
         span {
           font-size: 0.75rem;

@@ -5,7 +5,7 @@ type VoyagerDailyPosition = d3.DSVRowArray<
   'date' | 'range' | 'se_lat' | 'se_lon' | 'hg_lat' | 'hg_lon' | 'ihg_lon'
 >;
 
-type VoyagerImages = d3.DSVRowArray<'title' | 'caption' | 'image_url' | 'date'>;
+type VoyagerImages = d3.DSVRowArray<'title' | 'caption' | 'image_url' | 'page_url' | 'date'>;
 
 interface DataStore {
   isLoaded: boolean;

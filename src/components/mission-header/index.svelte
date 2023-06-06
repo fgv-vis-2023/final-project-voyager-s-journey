@@ -83,11 +83,6 @@ header {
   height: 100%;
 }
 
-img {
-  height: 100%;
-  margin-right: 1rem;
-}
-
 .text {
   display: flex;
   flex-direction: column;
