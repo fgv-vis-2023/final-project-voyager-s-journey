@@ -12,7 +12,7 @@ Occurred in: ${i}`:"",s=vr(t),u=Wi(e)?e(s):e;return`<${s}> ${u}${o}`}const no=t=
           <p class="author-school svelte-yob912"><a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a></p></div></li> 
       <li class="svelte-yob912"><img src="https://img2.gratispng.com/20180301/gte/kisspng-hammer-hand-tool-600-vector-red-fishtail-hammer-5a97b0e00e51d9.5055398715198906560587.jpg" alt="Marcelo Amaral" class="svelte-yob912"/> 
         <div class="text svelte-yob912"><p class="author-name svelte-yob912">Marcelo Amaral</p> 
-          <p class="author-email svelte-yob912">marcelo.rocket.league@fgv.edu.br</p> 
+          <p class="author-email svelte-yob912">marcelo.filho@fgv.br</p> 
           <p class="author-school svelte-yob912"><a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a></p></div></li></ul> 
 
     <div class="sources svelte-yob912"><h2 class="svelte-yob912">Sources</h2> 
