@@ -1,4 +1,5 @@
 <script lang="ts">
+import { basePath } from '@/env';
 import { data } from '@/stores/data';
 import { player } from '@/stores/player';
 import * as d3 from 'd3';
@@ -107,7 +108,7 @@ $: if (solarSystem) {
     .selectAll('image[data-name="sun"]')
     .attr('width', (4 * scale) / 10)
     .attr('height', (4 * scale) / 10)
-    .attr('href', `/images/sun.png`)
+    .attr('href', `${basePath}/images/sun.png`)
     .attr('x', width / 2)
     .attr('y', height / 2)
     .attr('transform', function (d) {
@@ -128,7 +129,7 @@ $: if (solarSystem) {
     .join('image')
     .attr('width', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
     .attr('height', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
-    .attr('href', (d) => `/images/${d.name}.png`)
+    .attr('href', (d) => `${basePath}/images/${d.name}.png`)
     .attr('class', 'planet')
     .attr('data-name', (d) => d.name)
     .attr('x', (d) => width / 2 + d.x * scale)

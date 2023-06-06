@@ -1,6 +1,7 @@
 <script lang="ts">
-import { Link } from 'svelte-routing';
+import { basePath } from '@/env';
 import { ChevronDown } from 'svelte-ionicons';
+import { Link } from 'svelte-navigator';
 
 function scrollDown() {
   const element = document.getElementById('about');
@@ -16,7 +17,7 @@ function scrollDown() {
       <li>
         <Link to="/voyager/1">
           <picture>
-            <img src="/images/posters/voyager1.jpg" alt="Voyager 1" />
+            <img src="{basePath}/images/posters/voyager1.jpg" alt="Voyager 1" />
             <legend>Voyager 1</legend>
           </picture>
         </Link>
@@ -25,7 +26,7 @@ function scrollDown() {
       <li>
         <Link to="/voyager/2">
           <picture>
-            <img src="/images/posters/voyager2.jpg" alt="Voyager 2" />
+            <img src="{basePath}/images/posters/voyager2.jpg" alt="Voyager 2" />
             <legend>Voyager 2</legend>
           </picture>
         </Link>
@@ -74,7 +75,7 @@ function scrollDown() {
         />
         <div class="text">
           <p class="author-name">Marcelo Amaral</p>
-          <p class="author-email">marcelo.rocket.league@fgv.edu.br</p>
+          <p class="author-email">marcelo.filho@fgv.br  </p>
           <p class="author-school">
             <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
           </p>

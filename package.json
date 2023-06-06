@@ -18,13 +18,13 @@
     "svelte": "^3.57.0",
     "svelte-check": "^2.10.3",
     "svelte-ionicons": "^0.5.6",
-    "svelte-routing": "^1.8.9",
     "tslib": "^2.5.0",
     "typescript": "^5.0.2",
     "vite": "^4.3.2"
   },
   "dependencies": {
     "d3": "^7.8.4",
-    "dayjs": "^1.11.8"
+    "dayjs": "^1.11.8",
+    "svelte-navigator": "^3.2.2"
   }
 }

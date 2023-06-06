@@ -2,10 +2,9 @@
 import HomePage from '@/pages/home';
 import VoyagerPage from '@/pages/voyager';
 import { onMount } from 'svelte';
-import { Route, Router } from 'svelte-routing';
-import { data, loadData } from './stores/data';
-
-export let url = '';
+import { Route, Router } from 'svelte-navigator';
+import { data, loadData } from '@/stores/data';
+import { basePath } from './env';
 
 onMount(() => {
   loadData();
@@ -18,9 +17,9 @@ onMount(() => {
     <progress />
   </div>
 {:else}
-  <Router {url}>
-    <Route path="/"><HomePage /></Route>
-    <Route path="/voyager/:missionNumber" let:params>
+  <Router basepath={basePath}>
+    <Route path=""><HomePage /></Route>
+    <Route path="voyager/:missionNumber" let:params>
       <VoyagerPage missionNumber={+params.missionNumber} />
     </Route>
   </Router>
