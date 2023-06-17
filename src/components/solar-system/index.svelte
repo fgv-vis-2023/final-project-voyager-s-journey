@@ -48,6 +48,7 @@ $: voyagerData = (
 $: playerDate = dayjs($player.date).format('YYYY-MM-DD');
 
 $: voyagerCoord = voyagerData.find((d) => d.date == playerDate);
+$: voyagerTrajectory = voyagerData.filter((d) => d.date <= playerDate).slice(-200);
 
 onMount(() => {
   solarSystem = d3.select('#solar-system');
@@ -70,8 +71,8 @@ onMount(() => {
     const x = clientX - rect.left;
     const y = clientY - rect.top;
 
-    center.x += +(1 - variation) * (x - width / 2 - center.x);
-    center.y += +(1 - variation) * (y - height / 2 - center.y);
+    center.x += (1 - variation) * (x - width / 2 - center.x);
+    center.y += (1 - variation) * (y - height / 2 - center.y);
   });
 
   solarSystem.on('mousedown', (event: MouseEvent) => {
@@ -105,10 +106,9 @@ $: if (solarSystem) {
   solarSystem.attr('width', width).attr('height', height);
 
   solarSystem
-    .selectAll('image[data-name="sun"]')
+    .select('image[data-name="sun"]')
     .attr('width', (4 * scale) / 10)
     .attr('height', (4 * scale) / 10)
-    .attr('href', `${basePath}/images/sun.png`)
     .attr('x', width / 2)
     .attr('y', height / 2)
     .attr('transform', function (d) {
@@ -124,42 +124,88 @@ $: if (solarSystem) {
   }));
 
   solarSystem
-    .selectAll('image.planet')
-    .data(plantesWithCoords, (d: { name: string }) => d.name)
-    .join('image')
-    .attr('width', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
-    .attr('height', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
-    .attr('href', (d) => `${basePath}/images/${d.name}.png`)
-    .attr('class', 'planet')
-    .attr('data-name', (d) => d.name)
-    .attr('x', (d) => width / 2 + d.x * scale)
-    .attr('y', (d) => height / 2 + d.y * scale)
-    .attr('transform', function (d) {
-      const rect = (this as SVGImageElement).getBoundingClientRect();
-      const { width, height } = rect;
+    .selectAll('g.planet')
+    .data(plantesWithCoords, (d: any) => d.name)
+    .join(
+      (enter) => {
+        const g = enter.append('g').attr('class', 'planet');
 
-      return `translate(${-width / 2 + center.x}, ${-height / 2 + center.y})`;
-    });
+        g.append('circle')
+          .attr('fill', '#fff1')
+          .attr('stroke', '#fff8')
+          .attr('stroke-width', 1)
+          .style('stroke-dasharray', 4);
+
+        g.append('image')
+          .attr('href', (d) => `${basePath}/images/${d.name}.png`)
+          .attr('class', 'planet')
+          .attr('data-name', (d) => d.name);
+
+        return g;
+      },
+      (update) => {
+        update.attr('transform', (d) => {
+          const tx = width / 2 + d.x * scale + center.x;
+          const ty = height / 2 + d.y * scale + center.y;
+
+          return `translate(${tx}, ${ty})`;
+        });
+
+        update.select('circle').attr('r', (d) => scale / 6);
+
+        update
+          .select('image')
+          .attr('width', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
+          .attr('height', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
+          .attr('transform', function (_d) {
+            const rect = (this as SVGImageElement).getBoundingClientRect();
+            const tx = -rect.width / 2;
+            const ty = -rect.height / 2;
+
+            return `translate(${tx}, ${ty})`;
+          });
+
+        return update;
+      }
+    );
 
   if (voyagerCoord) {
-    d3.select('circle[data-name="voyager"]')
-      .attr('r', scale / 50)
-      .attr('fill', 'white')
-      .attr('cx', width / 2 + voyagerCoord.x * scale)
-      .attr('cy', height / 2 + voyagerCoord.y * scale)
+    d3.select('image[data-name="voyager"]')
+      .attr('width', scale / 10)
+      .attr('height', scale / 10)
+      .attr('x', width / 2 + voyagerCoord.x * scale + center.x)
+      .attr('y', height / 2 + voyagerCoord.y * scale + center.y)
       .attr('transform', function (d) {
-        const rect = (this as SVGCircleElement).getBoundingClientRect();
-        const { width, height } = rect;
+        const rect = (this as SVGImageElement).getBoundingClientRect();
+        const tx = -rect.width / 2;
+        const ty = -rect.height / 2;
 
-        return `translate(${-width / 2 + center.x}, ${-height / 2 + center.y})`;
+        return `translate(${tx}, ${ty})`;
       });
+  }
+
+  if ((voyagerTrajectory?.length ?? 0) > 0) {
+    const line = d3
+      .line<typeof voyagerTrajectory[0]>()
+      .x((d) => width / 2 + d.x * scale + center.x)
+      .y((d) => height / 2 + d.y * scale + center.y)
+      .curve(d3.curveBundle);
+
+    d3.select('path[data-name="voyager-trajectory"]')
+      .attr('d', line(voyagerTrajectory))
+      .attr('stroke-dasharray', 4)
+      .attr('fill', 'none');
   }
 }
 </script>
 
 <svg id="solar-system">
-  <image data-name="sun" />
-  <circle data-name="voyager" />
+  <image data-name="sun" href="{basePath}/images/sun.png" />
+  <image
+    data-name="voyager"
+    href="https://cdn-icons-png.flaticon.com/512/6835/6835913.png"
+  />
+  <path data-name="voyager-trajectory" stroke="white" stroke-width="1" />
 </svg>
 
 <style lang="scss">
