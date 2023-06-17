@@ -24,6 +24,7 @@ let width = 0;
 let height = 0;
 let scale = 50;
 let center = { x: 0, y: 0 };
+let followVoyager = false;
 
 let solarSystem: d3.Selection<SVGSVGElement, unknown, HTMLElement, any>;
 let resizeObserver: ResizeObserver;
@@ -48,7 +49,13 @@ $: voyagerData = (
 $: playerDate = dayjs($player.date).format('YYYY-MM-DD');
 
 $: voyagerCoord = voyagerData.find((d) => d.date == playerDate);
-$: voyagerTrajectory = voyagerData.filter((d) => d.date <= playerDate).slice(-200);
+$: voyagerTrajectory = voyagerData
+  .filter((d) => d.date <= playerDate)
+  .slice(-200);
+
+$: computedCenter = followVoyager
+  ? { x: -voyagerCoord.x * scale, y: -voyagerCoord.y * scale }
+  : center;
 
 onMount(() => {
   solarSystem = d3.select('#solar-system');
@@ -79,6 +86,9 @@ onMount(() => {
     let { clientX, clientY } = event;
 
     const mouseMove = (event: MouseEvent) => {
+      center = computedCenter;
+      followVoyager = false;
+
       const { clientX: x, clientY: y } = event;
 
       center.x += x - clientX;
@@ -115,7 +125,9 @@ $: if (solarSystem) {
       const rect = (this as SVGImageElement).getBoundingClientRect();
       const { width, height } = rect;
 
-      return `translate(${-width / 2 + center.x}, ${-height / 2 + center.y})`;
+      return `translate(${
+        -width / 2 + computedCenter.x
+      }, ${-height / 2 + computedCenter.y})`;
     });
 
   const plantesWithCoords = planets.map((name) => ({
@@ -145,8 +157,8 @@ $: if (solarSystem) {
       },
       (update) => {
         update.attr('transform', (d) => {
-          const tx = width / 2 + d.x * scale + center.x;
-          const ty = height / 2 + d.y * scale + center.y;
+          const tx = width / 2 + d.x * scale + computedCenter.x;
+          const ty = height / 2 + d.y * scale + computedCenter.y;
 
           return `translate(${tx}, ${ty})`;
         });
@@ -173,8 +185,8 @@ $: if (solarSystem) {
     d3.select('image[data-name="voyager"]')
       .attr('width', scale / 10)
       .attr('height', scale / 10)
-      .attr('x', width / 2 + voyagerCoord.x * scale + center.x)
-      .attr('y', height / 2 + voyagerCoord.y * scale + center.y)
+      .attr('x', width / 2 + voyagerCoord.x * scale + computedCenter.x)
+      .attr('y', height / 2 + voyagerCoord.y * scale + computedCenter.y)
       .attr('transform', function (d) {
         const rect = (this as SVGImageElement).getBoundingClientRect();
         const tx = -rect.width / 2;
@@ -186,9 +198,9 @@ $: if (solarSystem) {
 
   if ((voyagerTrajectory?.length ?? 0) > 0) {
     const line = d3
-      .line<typeof voyagerTrajectory[0]>()
-      .x((d) => width / 2 + d.x * scale + center.x)
-      .y((d) => height / 2 + d.y * scale + center.y)
+      .line<(typeof voyagerTrajectory)[0]>()
+      .x((d) => width / 2 + d.x * scale + computedCenter.x)
+      .y((d) => height / 2 + d.y * scale + computedCenter.y)
       .curve(d3.curveBundle);
 
     d3.select('path[data-name="voyager-trajectory"]')
@@ -208,6 +220,10 @@ $: if (solarSystem) {
   <path data-name="voyager-trajectory" stroke="white" stroke-width="1" />
 </svg>
 
+<button class="follow-voyager-button" on:click={() => (followVoyager = true)}>
+  Follow Voyager
+</button>
+
 <style lang="scss">
 svg {
   background-color: black;
@@ -216,5 +232,22 @@ svg {
   height: 100%;
 
   user-select: none;
+}
+
+.follow-voyager-button {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+  width: fit-content;
+
+  background-color: transparent;
+  color: white;
+  border-color: white;
+  padding: 0.5rem 0.75rem;
+
+  &:hover {
+    background-color: white;
+    color: black;
+  }
 }
 </style>
