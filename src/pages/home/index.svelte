@@ -113,6 +113,20 @@ function scrollDown() {
             Published images of Voyager 1 and 2
           </a>
         </li>
+
+        <li>
+          <a
+            href="https://pds-ppi.igpp.ucla.edu/mission/Voyager"
+            target="_blank"
+          >
+            Voyager Mission Phases
+          </a>
+        </li>
+
+        <li>
+          Special thanks to Tulio Koneçny (<a href="https://instagram.com/bald.comics"
+          target="_blank">@bald.comics</a>) for the beautiful drawings of our Solar System.
+        </li>
       </ul>
     </div>
   </section>

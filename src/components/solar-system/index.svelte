@@ -215,7 +215,7 @@ $: if (solarSystem) {
   <image data-name="sun" href="{basePath}/images/sun.png" />
   <image
     data-name="voyager"
-    href="https://cdn-icons-png.flaticon.com/512/6835/6835913.png"
+    href="{basePath}/images/voyager.png"
   />
   <path data-name="voyager-trajectory" stroke="white" stroke-width="1" />
 </svg>
