@@ -5,7 +5,7 @@ import * as d3 from 'd3';
 import dayjs from 'dayjs';
 import { onDestroy, onMount } from 'svelte';
 
-export let missionNumber = 1;
+export let missionNumber: 1 | 2;
 
 let width = 0;
 let height = 0;
@@ -16,9 +16,9 @@ let resizeObserver: ResizeObserver;
 const padding = 15;
 const months = 6;
 
-$: voyagerDates = (
-  missionNumber == 1 ? $data.voyager1DailyPosition : $data.voyager2DailyPosition
-).map((d) => dayjs(d.date));
+const voyagerDates = $data.voyagerDailyPosition[missionNumber].map((d) =>
+  dayjs(d.date)
+);
 
 $: startDate = dayjs.min(voyagerDates)?.toDate();
 $: endDate = dayjs.max(voyagerDates)?.toDate();

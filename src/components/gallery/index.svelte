@@ -3,9 +3,9 @@ import { data } from '@/stores/data';
 import { player } from '@/stores/player';
 import dayjs from 'dayjs';
 
-export let missionNumber = 1;
+export let missionNumber: 1 | 2;
 
-$: images = missionNumber == 1 ? $data.voyager1Images : $data.voyager2Images;
+const images = $data.voyagerImages[missionNumber];
 
 $: imagesUntilDate = images
   .filter((image) => {

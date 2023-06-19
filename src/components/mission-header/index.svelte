@@ -1,8 +1,14 @@
 <script lang="ts">
-import { pausePlayer, player, resumePlayer } from '@/stores/player';
-import { PauseSharp, PlaySharp } from 'svelte-ionicons';
+import {
+  pausePlayer,
+  player,
+  resetPlayer,
+  resumePlayer,
+  togglePlayer,
+} from '@/stores/player';
+import { PauseSharp, PlaySharp, RefreshSharp } from 'svelte-ionicons';
 
-export let missionNumber = 1;
+export let missionNumber: 1 | 2;
 
 let dateInput: HTMLInputElement;
 
@@ -25,20 +31,24 @@ function onSpeedActionClick() {
   resumePlayer({ speed: nextSpeed });
 }
 
-function onPlayPauseActionClick() {
-  if ($player.isPlaying) {
-    pausePlayer();
-  } else {
-    resumePlayer();
-  }
+function onResetActionClick() {
+  resetPlayer(missionNumber);
+  (document.activeElement as HTMLElement)?.blur();
 }
 </script>
 
 <header>
-
   <div class="text">
     <div class="title">
       <h1 style="margin-right: auto">Voyager {missionNumber}</h1>
+
+      <button
+        data-tooltip="Reset"
+        data-placement="bottom"
+        on:click={onResetActionClick}
+      >
+        <RefreshSharp class="icon" style="transform: scaleX(-1)" />
+      </button>
 
       <button
         data-tooltip="Speed"
@@ -51,7 +61,7 @@ function onPlayPauseActionClick() {
       <button
         data-tooltip="Play/Pause"
         data-placement="bottom"
-        on:click={onPlayPauseActionClick}
+        on:click={togglePlayer}
       >
         {#if $player.isPlaying}
           <PauseSharp class="icon" />

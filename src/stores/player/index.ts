@@ -1,6 +1,11 @@
 import dayjs from 'dayjs';
 import { writable } from 'svelte/store';
 
+const voyagerInitialDate = {
+  1: dayjs('1977-09-09').toDate(),
+  2: dayjs('1977-08-25').toDate(),
+} as const;
+
 interface PlayerStore {
   isPlaying: boolean;
   date: Date;
@@ -9,7 +14,7 @@ interface PlayerStore {
 
 export const player = writable<PlayerStore>({
   isPlaying: true,
-  date: new Date(),
+  date: voyagerInitialDate[1],
   speed: 1,
 });
 
@@ -33,9 +38,15 @@ player.subscribe((value) => {
   }
 });
 
-export function resumePlayer(
-  args?: Exclude<Partial<PlayerStore>, 'isPlaying'>
-) {
+export function resetPlayer(missionNumber: 1 | 2) {
+  player.set({
+    isPlaying: false,
+    date: voyagerInitialDate[missionNumber],
+    speed: 1,
+  });
+}
+
+export function resumePlayer(args?: Partial<PlayerStore>) {
   player.update((oldPlayer) => ({
     isPlaying: true,
     date: args?.date ?? oldPlayer.date,

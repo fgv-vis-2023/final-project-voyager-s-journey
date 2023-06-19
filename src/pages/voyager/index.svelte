@@ -3,17 +3,13 @@ import Gallery from '@/components/gallery';
 import MissionHeader from '@/components/mission-header';
 import SolarSystem from '@/components/solar-system';
 import Timeline from '@/components/timeline';
-import { pausePlayer, resumePlayer } from '@/stores/player';
-import dayjs from 'dayjs';
+import { pausePlayer, resetPlayer } from '@/stores/player';
 import { onDestroy, onMount } from 'svelte';
 
-export let missionNumber = 1;
+export let missionNumber: 1 | 2 = 1;
 
 onMount(() => {
-  const initialDay = missionNumber == 1 ? '1977-09-05' : '1977-08-25';
-
-  resumePlayer({ date: dayjs(initialDay).toDate() });
-  pausePlayer();
+  resetPlayer(missionNumber);
 });
 
 onDestroy(() => {
@@ -24,7 +20,7 @@ onDestroy(() => {
 <main>
   <MissionHeader {missionNumber} />
   <Timeline {missionNumber} />
-  <Gallery {missionNumber}/>
+  <Gallery {missionNumber} />
   <SolarSystem {missionNumber} />
 </main>
 

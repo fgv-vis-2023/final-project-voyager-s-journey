@@ -5,20 +5,9 @@ import { player } from '@/stores/player';
 import * as d3 from 'd3';
 import dayjs from 'dayjs';
 import { onDestroy, onMount } from 'svelte';
-import { getPlanetCoords } from './planet-coords';
+import { getPlanetCoords, planets } from './planet-coords';
 
-const planets = [
-  'mercury',
-  'venus',
-  'earth',
-  'mars',
-  'jupiter',
-  'saturn',
-  'uranus',
-  'neptune',
-] as const;
-
-export let missionNumber = 1;
+export let missionNumber : 1 | 2;
 
 let width = 0;
 let height = 0;
@@ -29,22 +18,22 @@ let followVoyager = false;
 let solarSystem: d3.Selection<SVGSVGElement, unknown, HTMLElement, any>;
 let resizeObserver: ResizeObserver;
 
-$: voyagerData = (
-  missionNumber == 1 ? $data.voyager1DailyPosition : $data.voyager2DailyPosition
-).map((d) => {
-  const deg2rad = Math.PI / 180;
+const voyagerData = $data.voyagerDailyPosition[missionNumber].map(
+  (d) => {
+    const deg2rad = Math.PI / 180;
 
-  const r = +d.range;
-  const cosLat = Math.cos(+d.se_lat * deg2rad);
-  const sinLon = Math.sin(+d.se_lon * deg2rad);
-  const cosLon = Math.cos(+d.se_lon * deg2rad);
+    const r = +d.range;
+    const cosLat = Math.cos(+d.se_lat * deg2rad);
+    const sinLon = Math.sin(+d.se_lon * deg2rad);
+    const cosLon = Math.cos(+d.se_lon * deg2rad);
 
-  return {
-    date: dayjs(d.date).format('YYYY-MM-DD'),
-    x: r * cosLat * cosLon,
-    y: r * cosLat * sinLon,
-  };
-});
+    return {
+      date: dayjs(d.date).format('YYYY-MM-DD'),
+      x: r * cosLat * cosLon,
+      y: r * cosLat * sinLon,
+    };
+  }
+);
 
 $: playerDate = dayjs($player.date).format('YYYY-MM-DD');
 
@@ -213,10 +202,7 @@ $: if (solarSystem) {
 
 <svg id="solar-system">
   <image data-name="sun" href="{basePath}/images/sun.png" />
-  <image
-    data-name="voyager"
-    href="{basePath}/images/voyager.png"
-  />
+  <image data-name="voyager" href="{basePath}/images/voyager.png" />
   <path data-name="voyager-trajectory" stroke="white" stroke-width="1" />
 </svg>
 

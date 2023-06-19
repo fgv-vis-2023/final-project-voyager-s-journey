@@ -95,3 +95,7 @@ export function getPlanetCoords(
 
   return { x, y };
 }
+
+export const planets = Object.keys(keplerianElements) as Array<
+  keyof typeof keplerianElements
+>;
