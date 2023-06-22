@@ -9,4 +9,8 @@ $enable-responsive-typography: false;
   --background-color: #212529;
   --border-radius: 0;
   --outline-width: 0;
+
+  @media screen and (max-width: 1280px) {
+    --font-size: 12px;
+  }
 }

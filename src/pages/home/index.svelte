@@ -39,95 +39,115 @@ function scrollDown() {
   </section>
 
   <section id="about">
-    <h1>Authors</h1>
+    <div>
+      <h2>Authors</h2>
 
-    <ul class="authors">
-      <li>
-        <img
-          src="https://cdn.discordapp.com/attachments/800433264296329236/1115427618783768606/FsahyrvXsAASTiq.png"
-          alt="Eduardo Adame"
-        />
-        <div class="text">
-          <p class="author-name">Eduardo Adame</p>
-          <p class="author-email">eduardo.salles@fgv.br</p>
-          <p class="author-school">
-            <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
-          </p>
-        </div>
-      </li>
-      <li>
-        <img
-          src="https://avatars.cloudflare.steamstatic.com/48086503683ba76c474e1c257d56fa453b4ad379_full.jpg"
-          alt="Juan Belieni"
-        />
-        <div class="text">
-          <p class="author-name">Juan Belieni</p>
-          <p class="author-email">juan.araujo@fgv.edu.br</p>
-          <p class="author-school">
-            <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
-          </p>
-        </div>
-      </li>
-      <li>
-        <img
-          src="https://img2.gratispng.com/20180301/gte/kisspng-hammer-hand-tool-600-vector-red-fishtail-hammer-5a97b0e00e51d9.5055398715198906560587.jpg"
-          alt="Marcelo Amaral"
-        />
-        <div class="text">
-          <p class="author-name">Marcelo Amaral</p>
-          <p class="author-email">marcelo.filho@fgv.br  </p>
-          <p class="author-school">
-            <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
-          </p>
-        </div>
-      </li>
-    </ul>
-
-    <div class="sources">
-      <h2>Sources</h2>
-
-      <ul>
+      <ul class="authors">
         <li>
-          <a
-            href="https://data.nasa.gov/Earth-Science/VOYAGER-1-DAILY-POSITION-V1-0/cg9t-y7w6"
-            target="_blank"
-          >
-            Daily Position of Voyager 1
-          </a>
+          <img
+            src="https://cdn.discordapp.com/attachments/800433264296329236/1115427618783768606/FsahyrvXsAASTiq.png"
+            alt="Eduardo Adame"
+          />
+          <div class="text">
+            <p class="author-name">Eduardo Adame</p>
+            <p class="author-email">eduardo.salles@fgv.br</p>
+            <p class="author-school">
+              <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
+            </p>
+          </div>
         </li>
-
         <li>
-          <a
-            href="https://data.nasa.gov/Earth-Science/VOYAGER-2-DAILY-POSITION-V1-0/4hef-z9y3"
-            target="_blank"
-          >
-            Daily Position of Voyager 2
-          </a>
+          <img
+            src="https://avatars.cloudflare.steamstatic.com/48086503683ba76c474e1c257d56fa453b4ad379_full.jpg"
+            alt="Juan Belieni"
+          />
+          <div class="text">
+            <p class="author-name">Juan Belieni</p>
+            <p class="author-email">juan.araujo@fgv.edu.br</p>
+            <p class="author-school">
+              <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
+            </p>
+          </div>
         </li>
-
         <li>
-          <a
-            href="https://pds-rings.seti.org/galleries/voyager.html"
-            target="_blank"
-          >
-            Published images of Voyager 1 and 2
-          </a>
-        </li>
-
-        <li>
-          <a
-            href="https://pds-ppi.igpp.ucla.edu/mission/Voyager"
-            target="_blank"
-          >
-            Voyager Mission Phases
-          </a>
-        </li>
-
-        <li>
-          Special thanks to Tulio Koneçny (<a href="https://instagram.com/bald.comics"
-          target="_blank">@bald.comics</a>) for the beautiful drawings of our Solar System.
+          <img
+            src="https://img2.gratispng.com/20180301/gte/kisspng-hammer-hand-tool-600-vector-red-fishtail-hammer-5a97b0e00e51d9.5055398715198906560587.jpg"
+            alt="Marcelo Amaral"
+          />
+          <div class="text">
+            <p class="author-name">Marcelo Amaral</p>
+            <p class="author-email">marcelo.filho@fgv.br</p>
+            <p class="author-school">
+              <a href="https://emap.fgv.br/en" target="_blank">FGV/EMAp</a>
+            </p>
+          </div>
         </li>
       </ul>
+
+      <div class="sources">
+        <h3>Sources</h3>
+
+        <ul>
+          <li>
+            <a
+              href="https://data.nasa.gov/Earth-Science/VOYAGER-1-DAILY-POSITION-V1-0/cg9t-y7w6"
+              target="_blank"
+            >
+              Daily Position of Voyager 1
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://data.nasa.gov/Earth-Science/VOYAGER-2-DAILY-POSITION-V1-0/4hef-z9y3"
+              target="_blank"
+            >
+              Daily Position of Voyager 2
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://pds-rings.seti.org/galleries/voyager.html"
+              target="_blank"
+            >
+              Published images of Voyager 1 and 2
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="https://pds-ppi.igpp.ucla.edu/mission/Voyager"
+              target="_blank"
+            >
+              Voyager Mission Phases
+            </a>
+          </li>
+
+          <li>
+            Special thanks to Tulio Koneçny (<a
+              href="https://instagram.com/bald.comics"
+              target="_blank">@bald.comics</a
+            >) for the beautiful drawings of our Solar System.
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="mission-info">
+      <h2>About Voyager</h2>
+
+      <p>
+        The Voyager program is an American scientific program that employs two
+        robotic interstellar probes, Voyager 1 and Voyager 2. They were launched
+        in 1977 to take advantage of a favorable alignment of the two gas giants
+        Jupiter and Saturn and the ice giants, Uranus and Neptune, to fly near
+        them while collecting data for transmission back to Earth. After launch
+        the decision was taken to send Voyager 2 near Uranus and Neptune to
+        collect data for transmission back to Earth.
+      </p>
+
+      <img src="https://www.jpl.nasa.gov/edu/images/news/voyager_trajectories.png" alt="Voyager Trajectories" />
     </div>
   </section>
 </main>
@@ -164,15 +184,6 @@ section {
   flex-direction: column;
   align-items: center;
 
-  h1 {
-    font-size: 4rem;
-    color: #bd9526;
-
-    text-align: center;
-    margin-bottom: 4rem;
-    margin-top: 2rem;
-  }
-
   .scroll-down {
     position: absolute;
     bottom: 2rem;
@@ -186,6 +197,18 @@ section {
   }
 
   &#missions {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    h1 {
+      font-size: 4rem;
+      color: #bd9526;
+
+      text-align: center;
+      margin-top: 2rem;
+    }
+
     ol.missions {
       max-width: 100vw;
 
@@ -234,7 +257,30 @@ section {
   }
 
   &#about {
-    background-color: #222;
+    background-color: #141E28;
+
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+
+    padding: 2rem 4rem;
+
+    & > div {
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: start;
+      height: 100%;
+      max-width: 40rem;
+
+      h2 {
+        font-size: 4rem;
+        color: #bd9526;
+
+        text-align: center;
+        margin-bottom: 4rem;
+      }
+    }
 
     .authors {
       display: flex;
@@ -252,8 +298,8 @@ section {
         gap: 1rem;
 
         img {
-          width: 9rem;
-          height: 9rem;
+          width: 8rem;
+          height: 8rem;
           object-fit: cover;
         }
 
@@ -261,7 +307,7 @@ section {
           display: flex;
           flex-direction: column;
           justify-content: start;
-          height: 9rem;
+          height: 8rem;
 
           p {
             color: white;
@@ -296,7 +342,7 @@ section {
       flex-direction: column;
       align-items: center;
 
-      h2 {
+      h3 {
         margin-bottom: 0.5rem;
       }
 
@@ -307,8 +353,14 @@ section {
 
         li {
           margin: 0;
+          list-style: none;
+          text-align: center;
         }
       }
+    }
+
+    .mission-info {
+      text-align: justify;
     }
   }
 }
