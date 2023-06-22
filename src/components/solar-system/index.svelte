@@ -106,8 +106,8 @@ $: if (solarSystem) {
 
   solarSystem
     .select('image[data-name="sun"]')
-    .attr('width', (4 * scale) / 10)
-    .attr('height', (4 * scale) / 10)
+    .attr('width', (5 * scale) / 10)
+    .attr('height', (5 * scale) / 10)
     .attr('x', width / 2)
     .attr('y', height / 2)
     .attr('transform', function (d) {
@@ -156,8 +156,8 @@ $: if (solarSystem) {
 
         update
           .select('image')
-          .attr('width', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
-          .attr('height', (d) => ((d.name == 'saturn' ? 3 : 1) * scale) / 10)
+          .attr('width', (d) => ((d.name == 'saturn' ? 3 : 2) * scale) / 10)
+          .attr('height', (d) => ((d.name == 'saturn' ? 3 : 2) * scale) / 10)
           .attr('transform', function (_d) {
             const rect = (this as SVGImageElement).getBoundingClientRect();
             const tx = -rect.width / 2;

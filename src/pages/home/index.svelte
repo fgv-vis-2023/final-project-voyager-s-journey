@@ -157,7 +157,6 @@ main {
   background-color: #121212;
   overflow-x: hidden;
 
-  // smooth scroll
   scroll-behavior: smooth;
 }
 
