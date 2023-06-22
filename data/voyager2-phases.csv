@@ -1,0 +1,10 @@
+name,start_time,end_time,type
+Earth-Jupiter cruise,1977-08-20,1979-04-25,cruise
+Jupiter encounter,1979-04-25,1979-08-05,flyby
+Jupiter-Saturn cruise,1979-08-05,1981-06-05,cruise
+Saturn encounter,1981-06-05,1981-09-25,flyby
+Saturn-Uranus cruise,1981-09-25,1985-11-04,cruise
+Uranus encounter,1985-11-04,1986-02-25,flyby
+Uranus-Neptune cruise,1986-02-25,1989-06-05,cruise
+Neptune encounter,1989-06-05,1989-10-02,flyby
+Interstellar mission,1989-10-02,,cruise
