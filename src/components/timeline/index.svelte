@@ -16,15 +16,23 @@ let resizeObserver: ResizeObserver;
 const padding = 15;
 const months = 6;
 
-const voyagerDates = $data.voyagerDailyPosition[missionNumber].map((d) =>
+const phases = $data.voyagerPhases[missionNumber];
+const dates = $data.voyagerDailyPosition[missionNumber].map((d) =>
   dayjs(d.date)
 );
 
-$: startDate = dayjs.min(voyagerDates)?.toDate();
-$: endDate = dayjs.max(voyagerDates)?.toDate();
+console.log(phases);
+
+const startDate = dayjs.min(dates)?.toDate();
+const endDate = dayjs.max(dates)?.toDate();
 let hoveredDate = null;
 
 $: selectedDate = hoveredDate ?? $player.date;
+
+const timelineColorScale = d3
+  .scaleOrdinal()
+  .domain(phases.map((d) => d.type))
+  .range(["#11009E", "#4942E4"]);
 
 $: mainTimelineScale = d3
   .scaleTime()
@@ -94,6 +102,22 @@ $: if (timeline) {
     mainTimelineScale(lastSelectedDay) - mainTimelineScale(firstSelectedDay);
 
   mainTimeline
+    .selectAll('rect')
+    .data(phases)
+    .join('rect')
+    .attr('x', (d) => mainTimelineScale(dayjs(d.start_time).toDate()))
+    .attr('y', 0)
+    .attr(
+      'width',
+      (d) =>
+        mainTimelineScale(dayjs(d.end_time || endDate).toDate()) -
+        mainTimelineScale(dayjs(d.start_time).toDate())
+    )
+    .attr('height', 15)
+    .attr('fill', (d) => timelineColorScale(d.type) as string)
+    .attr('opacity', 1);
+
+  mainTimeline
     .selectAll('line')
     .data([$player.date])
     .join('line')
@@ -101,7 +125,7 @@ $: if (timeline) {
     .attr('x2', (d) => mainTimelineScale(d))
     .attr('y1', 0)
     .attr('y2', 15)
-    .attr('stroke', '#bd9526')
+    .attr('stroke', 'white')
     .attr('stroke-width', 2);
 
   mainTimelineBrush
@@ -114,6 +138,60 @@ $: if (timeline) {
   mainTimelineAxis.call(mainTimelineAxisScale as any);
 
   selectedTimeline
+    .selectAll('rect.phase')
+    .data(phases)
+    .join('rect')
+    .attr('class', 'phase')
+    .attr('x', (d) => selectedTimelineScale(dayjs(d.start_time).toDate()))
+    .attr('y', 0)
+    .attr(
+      'width',
+      (d) =>
+        selectedTimelineScale(dayjs(d.end_time || endDate).toDate()) -
+        selectedTimelineScale(dayjs(d.start_time).toDate())
+    )
+    .attr('height', height - 80)
+    .attr('fill', (d) => timelineColorScale(d.type) as string)
+    .attr('opacity', 1);
+
+  selectedTimeline
+    .selectAll('text.phase')
+    .data(phases)
+    .join('text')
+    .attr('class', 'phase')
+    .text((d) => d.name)
+    .attr('fill', 'white')
+    .attr('font-size', 16)
+    .attr('font-weight', 'bold')
+    .attr('x', function (d) {
+      const x = selectedTimelineScale(dayjs(d.start_time).toDate());
+      const rectWidth =
+        selectedTimelineScale(dayjs(d.end_time || endDate).toDate()) - x;
+      const textWidth = (this as SVGTextElement).getComputedTextLength();
+
+      if (x < 0 && textWidth + 15 < rectWidth + x) {
+        return 5;
+      } else if (x < 0 && textWidth + 15 > rectWidth + x) {
+        return rectWidth + x - textWidth - 10;
+      }
+
+      return x + 5;
+    })
+    .attr('y', 15);
+
+  selectedTimeline
+    .selectAll('rect.overflow')
+    .data([0, 1])
+    .join('rect')
+    .attr('class', 'overflow')
+    .attr('x', (d) => (d === 0 ? 0 : width) - padding * 2)
+    .attr('y', 0)
+    .attr('width', padding * 2)
+    .attr('height', height - 80)
+    .attr('fill', '#121212')
+    .attr('opacity', 1);
+
+  selectedTimeline
     .selectAll('line')
     .data([$player.date])
     .join('line')
@@ -121,7 +199,7 @@ $: if (timeline) {
     .attr('x2', (d) => selectedTimelineScale(d))
     .attr('y1', 0)
     .attr('y2', height - 80)
-    .attr('stroke', '#bd9526')
+    .attr('stroke', 'white')
     .attr('stroke-width', 2);
 
   selectedTimelineAxis.call(selectedTimelineAxisScale as any);

@@ -6,15 +6,22 @@ const voyagerInitialDate = {
   2: dayjs('1977-08-25').toDate(),
 } as const;
 
+const voyagerFinalDate = {
+  1: dayjs('2005-01-24').toDate(),
+  2: dayjs('2005-01-09').toDate(),
+} as const;
+
 interface PlayerStore {
   isPlaying: boolean;
   date: Date;
+  finalDate: Date;
   speed: number;
 }
 
 export const player = writable<PlayerStore>({
   isPlaying: true,
   date: voyagerInitialDate[1],
+  finalDate: voyagerFinalDate[1],
   speed: 1,
 });
 
@@ -27,8 +34,11 @@ player.subscribe((value) => {
     interval = setInterval(() => {
       player.update((oldPlayer) => ({
         ...oldPlayer,
-        date: dayjs(oldPlayer.date)
-          .add(2 * oldPlayer.speed, 'day')
+        date: dayjs
+          .min(
+            dayjs(oldPlayer.date).add(2 * oldPlayer.speed, 'day'),
+            dayjs(oldPlayer.finalDate)
+          )
           .toDate(),
       }));
     }, 35);
@@ -42,12 +52,14 @@ export function resetPlayer(missionNumber: 1 | 2) {
   player.set({
     isPlaying: false,
     date: voyagerInitialDate[missionNumber],
+    finalDate: voyagerFinalDate[missionNumber],
     speed: 1,
   });
 }
 
 export function resumePlayer(args?: Partial<PlayerStore>) {
   player.update((oldPlayer) => ({
+    ...oldPlayer,
     isPlaying: true,
     date: args?.date ?? oldPlayer.date,
     speed: args?.speed ?? oldPlayer.speed,
