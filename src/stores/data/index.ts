@@ -7,7 +7,7 @@ type VoyagerDailyPosition = d3.DSVRowArray<
 >;
 
 type VoyagerImages = d3.DSVRowArray<
-  'title' | 'caption' | 'image_url' | 'page_url' | 'date'
+  'title' | 'caption' | 'image_id' | 'page_url' | 'date'
 >;
 
 type VoyagerPhases = d3.DSVRowArray<

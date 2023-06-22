@@ -1,4 +1,5 @@
 <script lang="ts">
+import { basePath } from '@/env';
 import { data } from '@/stores/data';
 import { player } from '@/stores/player';
 import dayjs from 'dayjs';
@@ -15,10 +16,10 @@ $: imagesUntilDate = images
 </script>
 
 <ol>
-  {#each imagesUntilDate as image (image.image_url)}
+  {#each imagesUntilDate as image (image.image_id)}
     <li>
       <picture>
-        <img src={image.image_url} alt={image.title} />
+        <img src="{basePath}/images/gallery/voyager{missionNumber}/{image.image_id}.webp" alt={image.title} />
         <legend>
           <a href={image.page_url} target="_blank" rel="noopener noreferrer">
             {image.title}
