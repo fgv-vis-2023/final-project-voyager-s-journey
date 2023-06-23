@@ -44,10 +44,7 @@ function scrollDown() {
 
       <ul class="authors">
         <li>
-          <img
-            src="{basePath}/images/people/adame.jpg"
-            alt="Eduardo Adame"
-          />
+          <img src="{basePath}/images/people/adame.jpg" alt="Eduardo Adame" />
           <div class="text">
             <p class="author-name">Eduardo Adame</p>
             <p class="author-email">eduardo.salles@fgv.br</p>
@@ -57,10 +54,7 @@ function scrollDown() {
           </div>
         </li>
         <li>
-          <img
-            src="{basePath}/images/people/juan.jpg"
-            alt="Juan Belieni"
-          />
+          <img src="{basePath}/images/people/juan.jpg" alt="Juan Belieni" />
           <div class="text">
             <p class="author-name">Juan Belieni</p>
             <p class="author-email">juan.araujo@fgv.edu.br</p>
@@ -147,7 +141,23 @@ function scrollDown() {
         collect data for transmission back to Earth.
       </p>
 
-      <img src="https://www.jpl.nasa.gov/edu/images/news/voyager_trajectories.png" alt="Voyager Trajectories" />
+      <img
+        src="https://www.jpl.nasa.gov/edu/images/news/voyager_trajectories.png"
+        alt="Voyager Trajectories"
+      />
+
+      <p>
+        <span>
+          More info about the Voyager program and ou visualization can be found
+          in our
+        </span>
+        <a
+          href="https://github.com/fgv-vis-2023/final-project-voyagers-journey/blob/main/docs/article.pdf"
+          target="_blank"
+        >
+          article.
+        </a>
+      </p>
     </div>
   </section>
 </main>
@@ -256,7 +266,7 @@ section {
   }
 
   &#about {
-    background-color: #141E28;
+    background-color: #141e28;
 
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -334,8 +344,7 @@ section {
     }
 
     .sources {
-      margin-top: auto;
-      margin-bottom: 1rem;
+      margin-top: 4rem;
 
       display: flex;
       flex-direction: column;
@@ -360,6 +369,11 @@ section {
 
     .mission-info {
       text-align: justify;
+
+      img {
+        max-width: 30rem;
+        margin-bottom: 1rem;
+      }
     }
   }
 }
