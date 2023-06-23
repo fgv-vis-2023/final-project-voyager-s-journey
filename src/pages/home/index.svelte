@@ -45,7 +45,7 @@ function scrollDown() {
       <ul class="authors">
         <li>
           <img
-            src="https://cdn.discordapp.com/attachments/800433264296329236/1115427618783768606/FsahyrvXsAASTiq.png"
+            src="{basePath}/images/people/adame.jpg"
             alt="Eduardo Adame"
           />
           <div class="text">
@@ -58,7 +58,7 @@ function scrollDown() {
         </li>
         <li>
           <img
-            src="https://avatars.cloudflare.steamstatic.com/48086503683ba76c474e1c257d56fa453b4ad379_full.jpg"
+            src="{basePath}/images/people/juan.jpg"
             alt="Juan Belieni"
           />
           <div class="text">
@@ -71,7 +71,7 @@ function scrollDown() {
         </li>
         <li>
           <img
-            src="https://img2.gratispng.com/20180301/gte/kisspng-hammer-hand-tool-600-vector-red-fishtail-hammer-5a97b0e00e51d9.5055398715198906560587.jpg"
+            src="{basePath}/images/people/marcelo.jpeg"
             alt="Marcelo Amaral"
           />
           <div class="text">
