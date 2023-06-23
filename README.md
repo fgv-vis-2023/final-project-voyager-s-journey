@@ -6,6 +6,9 @@
 
 This is an interactive visualization of NASA's mission through the solar system.
 
+<!-- video teaser -->
+[Video teaser](https://drive.google.com/file/d/17GgaYyOW0SEgg511D8Gu4aDA7BkcN7KK/view?pli=1)
+
 ## Development
 
 ### Setup
